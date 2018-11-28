@@ -100,7 +100,7 @@ def get_guessed_word(secret_word, letters_guessed, my_word):# YEP
 
 def hangman_hard(secret_word, my_word, letters_counter, lives, warnings):
       if is_word_guessed(secret_word, my_word)==True:
-        print("Congratulations, you won! Your total score for this game is:", lives*len(secret_word))
+        print("Congratulations, you won! Your total score for this game is:", lives*len(set(secret_word)))
         return
       correct_word=False
       print("You have {} warnings left.".format(warnings))
@@ -127,7 +127,7 @@ def hangman_hard(secret_word, my_word, letters_counter, lives, warnings):
           print("Oops! That is not a valid letter. You have {} warnings left:".format(warnings), my_word)
           print("_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ ")
           continue
-        if letters_guessed in my_word:
+        elif letters_guessed in my_word or letters_guessed in letters_counter:
           warnings-=1
           print("You have {} warnings left.".format(warnings))
           print("You have {} guesses left.".format(lives))
@@ -199,7 +199,7 @@ def hangman_simple(secret_word, my_word, letters_counter, lives, warnings):
   correct_word=False
   while correct_word==False:
     if is_word_guessed(secret_word, my_word)==True:
-      print("Congratulations, you won! Your total score for this game is:", lives*len(secret_word))
+      print("Congratulations, you won! Your total score for this game is:", lives*len(set(secret_word)))
       return
     print("You have {} warnings left.".format(warnings))
     print("You have {} guesses left.".format(lives))
@@ -229,7 +229,7 @@ def hangman_simple(secret_word, my_word, letters_counter, lives, warnings):
       print("Oops! That is not a valid letter. You have {} warnings left:".format(warnings), my_word)
       print("_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ ")
       continue
-    if letters_guessed in my_word:
+    if letters_guessed in my_word or letters_guessed in letters_counter:
       warnings-=1
       print("You have {} warnings left.".format(warnings))
       print("You have {} guesses left.".format(lives))
